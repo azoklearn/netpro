@@ -1191,6 +1191,132 @@
     .terrain__inner{ padding:48px 18px; }
   }
 
+  /* =================== RESERVATION FORM =================== */
+  .res-form{
+    background:var(--white); border:1px solid var(--line);
+    border-radius:var(--radius-l); padding:32px;
+  }
+
+  /* Progress */
+  .res-progress{ display:flex; align-items:flex-start; margin-bottom:36px; }
+  .res-sdot{ display:flex; flex-direction:column; align-items:center; gap:6px; flex-shrink:0; }
+  .res-sdot__num{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--bone-2); border:2px solid var(--line); color:var(--muted);
+    display:grid; place-items:center; font-size:13px; font-weight:700;
+    transition:all .3s var(--ease);
+  }
+  .res-sdot__lbl{
+    font-size:10px; font-weight:600; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--muted); text-align:center;
+    transition:color .3s var(--ease);
+  }
+  .res-sdot.is-active .res-sdot__num{ background:var(--night); border-color:var(--night); color:var(--cyan); }
+  .res-sdot.is-active .res-sdot__lbl{ color:var(--night); }
+  .res-sdot.is-done .res-sdot__num{ background:var(--green); border-color:var(--green); color:var(--night); }
+  .res-sline{ flex:1; height:2px; background:var(--line); margin-top:16px; transition:background .4s var(--ease); }
+  .res-sline.is-done{ background:var(--green); }
+
+  /* Panels */
+  .res-panel{ display:none; }
+  .res-panel.is-active{ display:block; animation:res-in .35s var(--ease) both; }
+  @keyframes res-in{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+  .res-ptitle{ font-size:19px; font-weight:700; color:var(--night); margin:0 0 4px; letter-spacing:-.01em; }
+  .res-psub{ font-size:14px; color:var(--muted); margin:0 0 22px; }
+
+  /* Service cards */
+  .res-services{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:28px; }
+  .res-sc{ cursor:pointer; display:block; }
+  .res-sc input[type=radio]{ position:absolute; opacity:0; width:0; height:0; }
+  .res-sc__inner{
+    display:flex; flex-direction:column; gap:8px; padding:18px 16px;
+    border:2px solid var(--line); border-radius:var(--radius); background:var(--white);
+    height:100%; position:relative;
+    transition:border-color .2s, background .2s, box-shadow .2s;
+  }
+  .res-sc:hover .res-sc__inner{ border-color:rgba(16,192,224,.55); background:rgba(16,192,224,.02); }
+  .res-sc:has(input:checked) .res-sc__inner{
+    border-color:var(--cyan); background:rgba(16,192,224,.05);
+    box-shadow:0 0 0 3px rgba(16,192,224,.14);
+  }
+  .res-sc:has(input:checked) .res-sc__inner::after{
+    content:"✓"; position:absolute; top:10px; right:10px;
+    width:22px; height:22px; border-radius:50%;
+    background:var(--cyan); color:var(--night);
+    font-size:11px; font-weight:800; display:grid; place-items:center;
+  }
+  .res-sc__icon{ width:42px; height:42px; border-radius:10px; background:var(--night); color:var(--cyan); display:grid; place-items:center; }
+  .res-sc__icon svg{ width:20px; height:20px; }
+  .res-sc strong{ font-size:13.5px; font-weight:700; color:var(--night); line-height:1.3; }
+  .res-sc em{ font-style:normal; font-size:12px; color:var(--muted); line-height:1.4; }
+
+  /* Time slots */
+  .res-slots{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:28px; }
+  .res-slot{ cursor:pointer; display:block; }
+  .res-slot input[type=radio]{ position:absolute; opacity:0; width:0; height:0; }
+  .res-slot span{
+    display:block; text-align:center; padding:10px 6px;
+    border:1.5px solid var(--line); border-radius:10px;
+    font-size:12.5px; font-weight:500; color:var(--night); line-height:1.3;
+    transition:border-color .2s, background .2s, box-shadow .2s;
+  }
+  .res-slot:hover span{ border-color:var(--cyan); background:rgba(16,192,224,.04); }
+  .res-slot:has(input:checked) span{
+    border-color:var(--cyan); background:rgba(16,192,224,.08);
+    font-weight:700; box-shadow:0 0 0 3px rgba(16,192,224,.14);
+  }
+
+  /* Nav */
+  .res-nav{ display:flex; gap:12px; margin-top:20px; }
+  .res-nav .btn{ flex:1; }
+
+  /* Error */
+  .res-err{
+    font-size:13px; color:#c0392b;
+    background:rgba(192,57,43,.07); border:1px solid rgba(192,57,43,.22);
+    border-radius:8px; padding:10px 14px; margin-bottom:14px; display:none;
+  }
+  .res-err.is-visible{ display:block; }
+
+  /* Recap */
+  .res-recap{
+    background:var(--bone-2); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px; margin-bottom:24px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .res-recap-row{ display:flex; gap:12px; align-items:flex-start; font-size:14px; }
+  .res-recap-row svg{ width:16px; height:16px; color:var(--cyan); flex-shrink:0; margin-top:2px; }
+  .res-recap-row strong{ font-weight:600; color:var(--night); flex-shrink:0; min-width:90px; }
+  .res-recap-row span{ color:var(--muted); flex:1; }
+  .res-recap__edit{
+    font-size:12px; font-weight:600; color:var(--cyan);
+    background:none; border:none; cursor:pointer; padding:0; flex-shrink:0;
+    transition:color .2s;
+  }
+  .res-recap__edit:hover{ color:var(--night); }
+
+  /* Confirmation */
+  .res-sent{ display:none; text-align:center; padding:24px 0; }
+  .res-sent.is-visible{ display:block; animation:res-in .4s var(--ease) both; }
+  .res-sent__icon{
+    width:68px; height:68px; border-radius:50%;
+    background:rgba(147,215,35,.10); border:2px solid var(--green);
+    display:grid; place-items:center; margin:0 auto 18px;
+  }
+  .res-sent__icon svg{ width:30px; height:30px; color:var(--green); }
+  .res-sent h3{ font-size:20px; font-weight:700; color:var(--night); margin:0 0 10px; }
+  .res-sent p{ color:var(--muted); font-size:15px; max-width:38ch; margin:0 auto; line-height:1.65; }
+
+  /* Slots label */
+  .res-slots-lbl{ font-size:13px; font-weight:600; color:var(--night); margin:0 0 12px; letter-spacing:.01em; }
+
+  @media(max-width:640px){
+    .res-services{ grid-template-columns:1fr; }
+    .res-slots{ grid-template-columns:repeat(2,1fr); }
+    .res-form{ padding:22px 16px; }
+    .res-sdot__lbl{ display:none; }
+  }
+
   /* =================== PRELOADER =================== */
   .preloader{
     position:fixed; inset:0;
@@ -1835,9 +1961,9 @@
 <section class="contact" id="contact">
   <div class="container">
     <header class="section-head reveal">
-      <span class="section-eyebrow">Demande de devis</span>
-      <h2 class="section-title">Décrivez votre besoin, on vous répond rapidement.</h2>
-      <p class="section-sub">Vos informations restent confidentielles et sont utilisées uniquement pour vous recontacter.</p>
+      <span class="section-eyebrow">Réservation en ligne</span>
+      <h2 class="section-title">Réservez votre intervention en quelques clics.</h2>
+      <p class="section-sub">Choisissez votre prestation, un créneau et laissez vos coordonnées — nous vous confirmons sous 24h.</p>
     </header>
 
     <div class="cgrid">
@@ -1864,44 +1990,198 @@
         </ul>
       </aside>
 
-      <form class="form reveal delay-2" id="contactForm" novalidate>
-        <div class="frow">
+      <div class="res-form reveal delay-2" id="resForm">
+
+        <!-- Progression -->
+        <div class="res-progress" id="resProgress">
+          <div class="res-sdot is-active" data-step="1">
+            <div class="res-sdot__num">1</div>
+            <span class="res-sdot__lbl">Prestation</span>
+          </div>
+          <div class="res-sline" data-line="1"></div>
+          <div class="res-sdot" data-step="2">
+            <div class="res-sdot__num">2</div>
+            <span class="res-sdot__lbl">Date &amp; Heure</span>
+          </div>
+          <div class="res-sline" data-line="2"></div>
+          <div class="res-sdot" data-step="3">
+            <div class="res-sdot__num">3</div>
+            <span class="res-sdot__lbl">Coordonnées</span>
+          </div>
+          <div class="res-sline" data-line="3"></div>
+          <div class="res-sdot" data-step="4">
+            <div class="res-sdot__num">4</div>
+            <span class="res-sdot__lbl">Récap</span>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 1 : Prestation -->
+        <div class="res-panel is-active" id="rs1">
+          <p class="res-ptitle">Quelle prestation souhaitez-vous ?</p>
+          <p class="res-psub">Sélectionnez le type d’intervention.</p>
+          <div class="res-err" id="err1">Veuillez sélectionner une prestation pour continuer.</div>
+          <div class="res-services">
+
+            <label class="res-sc">
+              <input type="radio" name="prestation" value="Dégraissage de hotte" />
+              <div class="res-sc__inner">
+                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v4H4z"/><path d="M6 14v6h12v-6"/><path d="M7 10V6h10v4"/></svg></div>
+                <strong>Dégraissage de hotte</strong>
+                <em>Hottes, filtres, conduits &amp; gaines</em>
+              </div>
+            </label>
+
+            <label class="res-sc">
+              <input type="radio" name="prestation" value="Dératisation &amp; Désinsectisation" />
+              <div class="res-sc__inner">
+                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c3-4 7-4 9-2 2 2 6 3 9 1"/><path d="M3 17c0 2 2 3 4 3"/><circle cx="17" cy="9" r="1.4"/><path d="M14 11l-3-2"/></svg></div>
+                <strong>Dératisation &amp; Désinsectisation</strong>
+                <em>Rats, souris, cafards, nuisibles</em>
+              </div>
+            </label>
+
+            <label class="res-sc">
+              <input type="radio" name="prestation" value="Dépoussiérage &amp; Désinfection VMC / CTA" />
+              <div class="res-sc__inner">
+                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+                <strong>Dépoussiérage &amp; Désinfection VMC / CTA</strong>
+                <em>Réseaux de ventilation &amp; gaines</em>
+              </div>
+            </label>
+
+            <label class="res-sc">
+              <input type="radio" name="prestation" value="Nettoyage évaporateur, meuble froid &amp; climatisation" />
+              <div class="res-sc__inner">
+                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 6 6 9 6 13a6 6 0 0 0 12 0c0-4-3-7-6-11z"/><path d="M9 14h6"/></svg></div>
+                <strong>Évaporateur, meuble froid &amp; climatisation</strong>
+                <em>Froid commercial &amp; climatisation</em>
+              </div>
+            </label>
+
+          </div>
+          <button type="button" class="btn btn--primary" id="next1">Continuer →</button>
+        </div>
+
+        <!-- ÉTAPE 2 : Date & Heure -->
+        <div class="res-panel" id="rs2">
+          <p class="res-ptitle">Quand souhaitez-vous l’intervention ?</p>
+          <p class="res-psub">Choisissez une date et un créneau horaire.</p>
+          <div class="res-err" id="err2">Veuillez choisir une date et un créneau pour continuer.</div>
           <div class="field">
-            <label for="f-name">Nom</label>
-            <input type="text" id="f-name" name="name" required placeholder="Votre nom" autocomplete="name" />
+            <label for="res-date">Date souhaitée</label>
+            <input type="date" id="res-date" />
+          </div>
+          <p class="res-slots-lbl">Créneau horaire</p>
+          <div class="res-slots">
+            <label class="res-slot"><input type="radio" name="heure" value="07h – 09h" /><span>07h – 09h</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="09h – 11h" /><span>09h – 11h</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="11h – 13h" /><span>11h – 13h</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="13h – 15h" /><span>13h – 15h</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="15h – 17h" /><span>15h – 17h</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="17h – 20h" /><span>17h – 20h</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="Hors service" /><span>Hors service</span></label>
+            <label class="res-slot"><input type="radio" name="heure" value="À définir" /><span>À définir</span></label>
+          </div>
+          <div class="res-nav">
+            <button type="button" class="btn btn--ghost" id="prev2">← Retour</button>
+            <button type="button" class="btn btn--primary" id="next2">Continuer →</button>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 3 : Coordonnées -->
+        <div class="res-panel" id="rs3">
+          <p class="res-ptitle">Vos coordonnées</p>
+          <p class="res-psub">Pour confirmer le rendez-vous sous 24h.</p>
+          <div class="res-err" id="err3">Veuillez renseigner votre nom et votre téléphone.</div>
+          <div class="frow">
+            <div class="field">
+              <label for="res-name">Nom *</label>
+              <input type="text" id="res-name" placeholder="Votre nom" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="res-phone">Téléphone *</label>
+              <input type="tel" id="res-phone" placeholder="06 / 07…" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="frow">
+            <div class="field">
+              <label for="res-email">E-mail</label>
+              <input type="email" id="res-email" placeholder="votre@email.fr" autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="res-etab">Type d’établissement</label>
+              <select id="res-etab">
+                <option value="">Choisir…</option>
+                <option>Restaurant / Snack</option>
+                <option>Commerce / Boutique</option>
+                <option>Entreprise / Bureau</option>
+                <option>Cuisine collective</option>
+                <option>Particulier</option>
+                <option>Autre</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label for="f-phone">Téléphone</label>
-            <input type="tel" id="f-phone" name="phone" required placeholder="06 / 01 / 09…" autocomplete="tel" />
+            <label for="res-adresse">Adresse d’intervention</label>
+            <input type="text" id="res-adresse" placeholder="Rue, ville…" autocomplete="street-address" />
+          </div>
+          <div class="field">
+            <label for="res-msg">Message (facultatif)</label>
+            <textarea id="res-msg" style="min-height:80px;" placeholder="Superficie, précisions, urgence…"></textarea>
+          </div>
+          <div class="res-nav">
+            <button type="button" class="btn btn--ghost" id="prev3">← Retour</button>
+            <button type="button" class="btn btn--primary" id="next3">Voir le récapitulatif →</button>
           </div>
         </div>
 
-        <div class="field">
-          <label for="f-type">Type d’intervention</label>
-          <select id="f-type" name="type" required>
-            <option value="" disabled selected>Choisir une prestation</option>
-            <option>Dégraissage de hotte</option>
-            <option>Dératisation &amp; Désinsectisation</option>
-            <option>Dépoussiérage &amp; Désinfection VMC / CTA</option>
-            <option>Nettoyage évaporateur, meuble froid &amp; climatisation</option>
-            <option>Autre</option>
-          </select>
+        <!-- ÉTAPE 4 : Récapitulatif -->
+        <div class="res-panel" id="rs4">
+          <p class="res-ptitle">Récapitulatif de votre demande</p>
+          <p class="res-psub">Vérifiez les informations avant d’envoyer.</p>
+          <div class="res-recap">
+            <div class="res-recap-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <strong>Prestation</strong><span id="recap-prestation">—</span>
+              <button type="button" class="res-recap__edit" data-goto="1">Modifier</button>
+            </div>
+            <div class="res-recap-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <strong>Date</strong><span id="recap-date">—</span>
+              <button type="button" class="res-recap__edit" data-goto="2">Modifier</button>
+            </div>
+            <div class="res-recap-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+              <strong>Créneau</strong><span id="recap-heure">—</span>
+              <button type="button" class="res-recap__edit" data-goto="2">Modifier</button>
+            </div>
+            <div class="res-recap-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <strong>Contact</strong><span id="recap-contact">—</span>
+              <button type="button" class="res-recap__edit" data-goto="3">Modifier</button>
+            </div>
+            <div class="res-recap-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <strong>Adresse</strong><span id="recap-adresse">—</span>
+              <button type="button" class="res-recap__edit" data-goto="3">Modifier</button>
+            </div>
+          </div>
+          <div class="res-nav">
+            <button type="button" class="btn btn--ghost" id="prev4">← Retour</button>
+            <button type="button" class="btn btn--primary" id="res-submit">Envoyer la demande ✓</button>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="f-msg">Message</label>
-          <textarea id="f-msg" name="message" placeholder="Type d’établissement, surface, urgence, photos si disponibles…"></textarea>
+        <!-- Confirmation -->
+        <div class="res-sent" id="resSent">
+          <div class="res-sent__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Demande envoyée !</h3>
+          <p>Nous avons bien reçu votre demande et vous recontactons dans les 24h pour confirmer le rendez-vous.</p>
         </div>
 
-        <button type="submit" class="btn btn--primary">Envoyer la demande</button>
-
-        <div class="form__status" id="formStatus" role="status" aria-live="polite">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>Votre demande est prête à être envoyée. Remplacez cette action par votre système de contact.</span>
-        </div>
-
-        <p class="form__hint">En envoyant ce formulaire, vous acceptez d’être recontacté par Hygiène Net Pro à propos de votre demande.</p>
-      </form>
+      </div>
     </div>
   </div>
 </section>
@@ -2075,31 +2355,100 @@
     stickyScroll();
   }
 
-  /* ---------- Form handler ---------- */
-  var form = document.getElementById('contactForm');
-  var status = document.getElementById('formStatus');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
+  /* ---------- Reservation form ---------- */
+  (function(){
+    var fd = {};
 
-    // simple required validation
-    var required = form.querySelectorAll('[required]');
-    var ok = true;
-    required.forEach(function(field){
-      if(!field.value.trim()){
-        field.style.borderColor = '#e85a5a';
-        ok = false;
-      } else {
-        field.style.borderColor = '';
+    function el(id){ return document.getElementById(id); }
+
+    var panels = [el('rs1'), el('rs2'), el('rs3'), el('rs4')];
+    var dots   = document.querySelectorAll('.res-sdot');
+    var lines  = document.querySelectorAll('.res-sline');
+    var prog   = el('resProgress');
+
+    function goStep(n){
+      panels.forEach(function(p,i){ p.classList.toggle('is-active', i===n-1); });
+      dots.forEach(function(d,i){
+        d.classList.remove('is-active','is-done');
+        if(i+1===n) d.classList.add('is-active');
+        if(i+1<n)  d.classList.add('is-done');
+      });
+      lines.forEach(function(l,i){ l.classList.toggle('is-done', i+1<n); });
+      if(n===4) fillRecap();
+    }
+
+    function validate(n){
+      var err = el('err'+n);
+      var ok = false;
+      if(n===1){
+        var ch = document.querySelector('input[name="prestation"]:checked');
+        ok = !!ch;
+        if(ok) fd.prestation = ch.value;
       }
+      if(n===2){
+        var d  = el('res-date').value;
+        var h  = document.querySelector('input[name="heure"]:checked');
+        ok = !!(d && h);
+        if(ok){ fd.date=d; fd.heure=h.value; }
+      }
+      if(n===3){
+        var nm = el('res-name').value.trim();
+        var ph = el('res-phone').value.trim();
+        ok = !!(nm && ph);
+        if(ok){
+          fd.nom=nm; fd.phone=ph;
+          fd.email   = el('res-email').value.trim();
+          fd.etab    = el('res-etab').value;
+          fd.adresse = el('res-adresse').value.trim();
+          fd.message = el('res-msg').value.trim();
+        }
+      }
+      if(err) err.classList.toggle('is-visible', !ok);
+      return ok;
+    }
+
+    function fillRecap(){
+      el('recap-prestation').textContent = fd.prestation||'—';
+      if(fd.date){
+        var p=fd.date.split('-');
+        var dt=new Date(+p[0],+p[1]-1,+p[2]);
+        el('recap-date').textContent=dt.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+      }
+      el('recap-heure').textContent  = fd.heure||'—';
+      el('recap-contact').textContent= [fd.nom, fd.phone, fd.email].filter(Boolean).join(' · ')||'—';
+      el('recap-adresse').textContent= fd.adresse||(fd.etab||'—');
+    }
+
+    // Next / Prev
+    [1,2,3].forEach(function(n){
+      var btn=el('next'+n);
+      if(btn) btn.addEventListener('click',function(){ if(validate(n)) goStep(n+1); });
     });
-    if(!ok){ return; }
+    [2,3,4].forEach(function(n){
+      var btn=el('prev'+n);
+      if(btn) btn.addEventListener('click',function(){ goStep(n-1); });
+    });
 
-    status.classList.add('is-visible');
-    status.scrollIntoView({ behavior:'smooth', block:'center' });
+    // Modifier buttons in recap
+    document.querySelectorAll('.res-recap__edit').forEach(function(btn){
+      btn.addEventListener('click',function(){ goStep(parseInt(btn.dataset.goto)); });
+    });
 
-    // ne pas envoyer réellement — à brancher sur votre système (email, API, etc.)
-    form.reset();
-  });
+    // Submit
+    var sub=el('res-submit');
+    if(sub) sub.addEventListener('click',function(){
+      panels.forEach(function(p){ p.classList.remove('is-active'); });
+      if(prog) prog.style.display='none';
+      el('resSent').classList.add('is-visible');
+    });
+
+    // Min date = demain
+    var di=el('res-date');
+    if(di){
+      var t=new Date(); t.setDate(t.getDate()+1);
+      di.min=t.toISOString().split('T')[0];
+    }
+  })();
 })();
 </script>
 </body>

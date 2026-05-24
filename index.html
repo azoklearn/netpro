@@ -50,7 +50,7 @@
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  html{ margin:0; padding:0; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
   body{
     margin:0;
     font-family:'Inter','Helvetica Neue',Arial,sans-serif;
@@ -422,6 +422,7 @@
 
   /* =================== HERO =================== */
   .hero{
+    padding:0;
     background:var(--night) url('Hero.png') center right / cover no-repeat;
     color:var(--white);
     position:relative;
@@ -789,22 +790,58 @@
   @media(max-width:860px){
     .rgal-grid{ grid-template-columns:1fr; }
     .rgal-info{ padding-bottom:4px; }
-    .ba-pair{ height:260px; }
+    .ba-pair{ height:220px; }
   }
   @media(max-width:520px){
-    .ba-pair{ height:auto; flex-direction:column; }
-    .ba-side img{ height:220px; }
-    .ba-split{
-      left:0; right:0; top:50%; bottom:auto;
-      transform:translateY(-50%);
-      width:auto; height:2px;
-      background:linear-gradient(to right,
-        transparent 0%, rgba(255,255,255,.35) 20%,
-        rgba(255,255,255,.35) 80%, transparent 100%
-      );
-    }
-    .ba-label--apres{ top:14px; right:auto; left:14px; }
+    .ba-pair{ height:180px; }
+    .ba-label{ font-size:9px; padding:4px 9px; top:8px; }
+    .ba-label--avant{ left:8px; }
+    .ba-label--apres{ right:8px; }
+    .ba-split__icon{ width:32px; height:32px; }
+    .ba-split__icon svg{ width:13px; height:13px; }
+    .ba-pair__caption{ font-size:10px; padding:20px 14px 10px; }
   }
+
+  /* Lightbox */
+  .lb{
+    position:fixed; inset:0; z-index:9999;
+    background:rgba(0,0,0,.93);
+    display:none; align-items:center; justify-content:center;
+    padding:20px;
+    cursor:zoom-out;
+  }
+  .lb.is-open{ display:flex; animation:lb-in .22s ease both; }
+  @keyframes lb-in{ from{ opacity:0; } to{ opacity:1; } }
+  .lb__img{
+    max-width:100%; max-height:90vh;
+    object-fit:contain;
+    border-radius:var(--radius);
+    box-shadow:0 40px 80px rgba(0,0,0,.7);
+    cursor:default;
+    animation:lb-zoom .28s var(--ease) both;
+  }
+  @keyframes lb-zoom{ from{ transform:scale(.93); } to{ transform:scale(1); } }
+  .lb__close{
+    position:absolute; top:16px; right:16px;
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
+    color:#fff; font-size:18px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s;
+  }
+  .lb__close:hover{ background:rgba(255,255,255,.22); }
+  .lb__nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
+    color:#fff; font-size:20px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s;
+  }
+  .lb__nav:hover{ background:rgba(255,255,255,.22); }
+  .lb__prev{ left:16px; }
+  .lb__next{ right:72px; }
+  .ba-side img{ cursor:zoom-in; }
 
   /* =================== TERRAIN STRIP =================== */
   .terrain{
@@ -1310,6 +1347,68 @@
   /* Slots label */
   .res-slots-lbl{ font-size:13px; font-weight:600; color:var(--night); margin:0 0 12px; letter-spacing:.01em; }
 
+  /* Photo upload */
+  .res-upload-zone{
+    border:2px dashed var(--line);
+    border-radius:var(--radius);
+    padding:28px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .2s, background .2s;
+    position:relative;
+  }
+  .res-upload-zone:hover,
+  .res-upload-zone.drag-over{
+    border-color:var(--cyan);
+    background:rgba(16,192,224,.04);
+  }
+  .res-upload-zone input[type=file]{
+    position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+  }
+  .res-upload-zone__icon{
+    width:44px; height:44px; border-radius:12px;
+    background:var(--bone-2); border:1px solid var(--line);
+    display:grid; place-items:center;
+    margin:0 auto 12px;
+  }
+  .res-upload-zone__icon svg{ width:22px; height:22px; color:var(--muted); }
+  .res-upload-zone__txt{
+    font-size:14px; font-weight:600; color:var(--night); margin:0 0 4px;
+  }
+  .res-upload-zone__sub{
+    font-size:12.5px; color:var(--muted);
+  }
+  .res-upload-zone__sub span{
+    color:var(--cyan); font-weight:600;
+  }
+
+  /* Preview thumbnails */
+  .res-upload-previews{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:14px;
+  }
+  .res-thumb{
+    position:relative;
+    width:72px; height:72px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .res-thumb img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .res-thumb__del{
+    position:absolute; top:3px; right:3px;
+    width:18px; height:18px; border-radius:50%;
+    background:rgba(0,0,0,.65); color:#fff;
+    font-size:10px; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; border:none;
+    transition:background .15s;
+  }
+  .res-thumb__del:hover{ background:rgba(200,0,0,.8); }
+
   @media(max-width:640px){
     .res-services{ grid-template-columns:1fr; }
     .res-slots{ grid-template-columns:repeat(2,1fr); }
@@ -1437,8 +1536,8 @@
   <div class="container hero__grid">
     <div>
       <h1 class="reveal delay-1">
-        Dégraissage, dératisation, VMC &amp;
-        <span class="hl">froid professionnel</span> pour professionnels
+        Dégraissage, dépoussiérage, VMC / CTA &amp;
+        <span class="hl">traitement des nuisibles</span> pour professionnels
       </h1>
       <p class="hero__lead reveal delay-2">
         Interventions rapides, propres et documentées pour restaurants, commerces,
@@ -1493,8 +1592,8 @@
           <span class="ok">Conforme</span>
         </li>
         <li class="ic__row">
-          <strong>Filtres &amp; gaines</strong>
-          <span>Nettoyés &amp; rincés</span>
+          <strong>Filtres, conduits, gaines &amp; caisson</strong>
+          <span>Dégraissés, rincés &amp; désodorisés</span>
         </li>
         <li class="ic__row">
           <strong>Rapport photo</strong>
@@ -2053,7 +2152,7 @@
               <input type="radio" name="prestation" value="Nettoyage évaporateur, meuble froid &amp; climatisation" />
               <div class="res-sc__inner">
                 <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 6 6 9 6 13a6 6 0 0 0 12 0c0-4-3-7-6-11z"/><path d="M9 14h6"/></svg></div>
-                <strong>Évaporateur, meuble froid &amp; climatisation</strong>
+                <strong>Nettoyage évaporateur et meuble froid</strong>
                 <em>Froid commercial &amp; climatisation</em>
               </div>
             </label>
@@ -2129,6 +2228,20 @@
             <label for="res-msg">Message (facultatif)</label>
             <textarea id="res-msg" style="min-height:80px;" placeholder="Superficie, précisions, urgence…"></textarea>
           </div>
+
+          <div class="field">
+            <label>Photos (facultatif)</label>
+            <div class="res-upload-zone" id="uploadZone">
+              <input type="file" id="res-photos" accept="image/*" multiple />
+              <div class="res-upload-zone__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <p class="res-upload-zone__txt">Glissez vos photos ici</p>
+              <p class="res-upload-zone__sub">ou <span>cliquez pour sélectionner</span> · JPG, PNG, HEIC · max 5 photos</p>
+            </div>
+            <div class="res-upload-previews" id="uploadPreviews"></div>
+          </div>
+
           <div class="res-nav">
             <button type="button" class="btn btn--ghost" id="prev3">← Retour</button>
             <button type="button" class="btn btn--primary" id="next3">Voir le récapitulatif →</button>
@@ -2185,6 +2298,14 @@
     </div>
   </div>
 </section>
+
+<!-- ============== LIGHTBOX ============== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo agrandie">
+  <button class="lb__close" id="lbClose" aria-label="Fermer">✕</button>
+  <button class="lb__nav lb__prev" id="lbPrev" aria-label="Précédent">‹</button>
+  <img class="lb__img" id="lbImg" src="" alt="" />
+  <button class="lb__nav lb__next" id="lbNext" aria-label="Suivant">›</button>
+</div>
 
 <!-- Sticky mobile CTA -->
 <div class="sticky-cta" id="stickyCta" aria-label="Actions rapides">
@@ -2354,6 +2475,94 @@
     window.addEventListener('scroll', stickyScroll, { passive:true });
     stickyScroll();
   }
+
+  /* ---------- Lightbox ---------- */
+  (function(){
+    var lb     = document.getElementById('lb');
+    var lbImg  = document.getElementById('lbImg');
+    var lbClose= document.getElementById('lbClose');
+    var lbPrev = document.getElementById('lbPrev');
+    var lbNext = document.getElementById('lbNext');
+
+    var imgs = Array.from(document.querySelectorAll('.ba-side img'));
+    var cur  = 0;
+
+    function open(idx){
+      cur = (idx + imgs.length) % imgs.length;
+      lbImg.src = imgs[cur].src;
+      lbImg.alt = imgs[cur].alt;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    imgs.forEach(function(img, i){
+      img.addEventListener('click', function(){ open(i); });
+    });
+
+    lb.addEventListener('click', function(e){
+      if(e.target === lb) close();
+    });
+    lbClose.addEventListener('click', close);
+    lbPrev.addEventListener('click', function(e){ e.stopPropagation(); open(cur-1); });
+    lbNext.addEventListener('click', function(e){ e.stopPropagation(); open(cur+1); });
+
+    document.addEventListener('keydown', function(e){
+      if(!lb.classList.contains('is-open')) return;
+      if(e.key==='Escape')      close();
+      if(e.key==='ArrowLeft')   open(cur-1);
+      if(e.key==='ArrowRight')  open(cur+1);
+    });
+  })();
+
+  /* ---------- Photo upload ---------- */
+  (function(){
+    var zone     = document.getElementById('uploadZone');
+    var input    = document.getElementById('res-photos');
+    var previews = document.getElementById('uploadPreviews');
+    var files    = [];
+
+    if(!zone) return;
+
+    function addFiles(newFiles){
+      Array.from(newFiles).forEach(function(f){
+        if(!f.type.startsWith('image/')) return;
+        if(files.length >= 5) return;
+        files.push(f);
+        var thumb = document.createElement('div');
+        thumb.className = 'res-thumb';
+        var img = document.createElement('img');
+        img.src = URL.createObjectURL(f);
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'res-thumb__del';
+        del.innerHTML = '✕';
+        del.setAttribute('aria-label','Supprimer');
+        del.addEventListener('click', function(){
+          var idx = Array.from(previews.children).indexOf(thumb);
+          files.splice(idx, 1);
+          URL.revokeObjectURL(img.src);
+          thumb.remove();
+        });
+        thumb.appendChild(img);
+        thumb.appendChild(del);
+        previews.appendChild(thumb);
+      });
+    }
+
+    input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+
+    zone.addEventListener('dragover', function(e){ e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', function(){ zone.classList.remove('drag-over'); });
+    zone.addEventListener('drop', function(e){
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      addFiles(e.dataTransfer.files);
+    });
+  })();
 
   /* ---------- Reservation form ---------- */
   (function(){

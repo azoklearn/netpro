@@ -50,7 +50,7 @@
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
-  html{ margin:0; padding:0; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  html{ margin:0; padding:0; background:var(--night); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
   body{
     margin:0;
     font-family:'Inter','Helvetica Neue',Arial,sans-serif;
@@ -423,6 +423,8 @@
   /* =================== HERO =================== */
   .hero{
     padding:0;
+    margin-top:-88px;          /* remonte le hero sous le header sticky */
+    scroll-margin-top:0;
     background:var(--night) url('Hero.png') center right / cover no-repeat;
     color:var(--white);
     position:relative;
@@ -453,7 +455,7 @@
     grid-template-columns:1.15fr .85fr;
     gap:60px;
     align-items:center;
-    padding:90px 0 110px;
+    padding:178px 0 110px; /* 88px header + 90px espace visuel */
   }
   /* cyan glow on the right side — sits above photo for atmosphere */
   .hero__glow{

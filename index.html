@@ -638,6 +638,18 @@
   .scard:hover{ box-shadow:var(--shadow); border-color:#d4d4dc; transform:translateY(-2px); }
   .scard:hover::after{ width:100%; }
 
+  /* lien "en savoir plus" — rend toute la carte cliquable */
+  .scard__more{
+    display:inline-flex; align-items:center; gap:7px;
+    margin-top:20px; font-weight:700; font-size:14.5px;
+    color:var(--night); transition:gap .25s var(--ease), color .2s;
+  }
+  .scard__more svg{ width:16px; height:16px; transition:transform .25s var(--ease); }
+  .scard:hover .scard__more{ color:var(--cyan); }
+  .scard:hover .scard__more svg{ transform:translateX(3px); }
+  .scard__more::before{ content:""; position:absolute; inset:0; z-index:2; }
+  .scard{ cursor:pointer; }
+
   /* card image header */
   .scard__img{
     margin:-30px -30px 24px;
@@ -1543,8 +1555,7 @@
       </h1>
       <p class="hero__lead reveal delay-2">
         Interventions rapides, propres et documentées pour restaurants,
-        cuisines collectives et commerces. Dératisation, VMC/CTA et
-        évaporateurs : découvrez tous nos services ci-dessous.
+        cuisines collectives et commerces.
       </p>
 
       <div class="hero__cta reveal delay-2">
@@ -1595,8 +1606,8 @@
           <span class="ok">Conforme</span>
         </li>
         <li class="ic__row">
-          <strong>Filtres, conduits, gaines &amp; caisson</strong>
-          <span>Dégraissés, rincés &amp; désodorisés</span>
+          <strong>Filtres, gaines, caisson &amp; moteur d'extraction</strong>
+          <span class="ok">Conforme</span>
         </li>
         <li class="ic__row">
           <strong>Rapport photo</strong>
@@ -1618,7 +1629,7 @@
     <header class="section-head reveal">
       <span class="section-eyebrow">Pourquoi agir maintenant</span>
       <h2 class="section-title">Un problème d’hygiène peut vite devenir un risque pour votre activité</h2>
-      <p class="section-sub">Trois situations courantes qui justifient une intervention rapide avant qu’elles ne s’aggravent.</p>
+      <p class="section-sub">Une situation courante qui justifie une intervention rapide avant qu’elle ne s’aggrave.</p>
     </header>
 
     <div class="pgrid">
@@ -1632,25 +1643,6 @@
         <p>Risque d’incendie, mauvaises odeurs, perte d’efficacité de l’extraction.</p>
       </article>
 
-      <article class="pcard reveal delay-2">
-        <div class="pcard__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0z"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 16c1.5-1 2.5-1.5 4-1.5s2.5.5 4 1.5"/>
-          </svg>
-        </div>
-        <h3>Présence de nuisibles</h3>
-        <p>Rats, souris, cafards ou insectes peuvent nuire à l’image et à la sécurité sanitaire.</p>
-      </article>
-
-      <article class="pcard reveal delay-3">
-        <div class="pcard__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5z"/><path d="m9 12 2 2 4-4"/>
-          </svg>
-        </div>
-        <h3>Locaux contaminés</h3>
-        <p>Besoin de désinfection après incident, passage intensif ou risque biologique.</p>
-      </article>
     </div>
   </div>
 </section>
@@ -1659,9 +1651,9 @@
 <section class="services" id="services">
   <div class="container">
     <header class="section-head reveal">
-      <span class="section-eyebrow">Nos prestations</span>
-      <h2 class="section-title">Quatre prestations spécialisées, une exigence : un résultat propre et documenté.</h2>
-      <p class="section-sub">Chaque prestation est adaptée à votre type d’établissement et réalisée dans le respect des normes d’hygiène.</p>
+      <span class="section-eyebrow">Notre prestation</span>
+      <h2 class="section-title">Dégraissage de hotte professionnelle.</h2>
+      <p class="section-sub">Intervention adaptée à votre type d’établissement et réalisée dans le strict respect des normes d’hygiène en vigueur.</p>
     </header>
 
     <div class="sgrid">
@@ -1684,70 +1676,12 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Rapport photo avant / après remis</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Attestation valable pour les contrôles</li>
         </ul>
+        <a href="degraissage-hotte.html" class="scard__more">
+          En savoir plus
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </article>
 
-      <!-- Service 2 -->
-      <article class="scard reveal delay-2">
-        <div class="scard__img">
-          <img src="degraissage.png" alt="Dératisation et désinsectisation professionnelle — Hygiène Net Pro" loading="lazy" />
-        </div>
-        <div class="scard__top">
-          <div class="scard__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 17c3-4 7-4 9-2 2 2 6 3 9 1"/><path d="M3 17c0 2 2 3 4 3"/><circle cx="17" cy="9" r="1.4"/><path d="M14 11l-3-2"/>
-            </svg>
-          </div>
-          <h3>Dératisation &amp; Désinsectisation</h3>
-        </div>
-        <p>Identification complète des colonies et des points d’accès, puis traitement radical par des techniciens certifiés. Rongeurs, cafards, blattes, frelons : chaque situation est traitée avec des produits biocides homologués et des techniques inaccessibles au grand public.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Diagnostic complet des accès</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Produits biocides certifiés</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Plan de prévention &amp; suivi inclus</li>
-        </ul>
-      </article>
-
-      <!-- Service 3 -->
-      <article class="scard reveal delay-3">
-        <div class="scard__img">
-          <img src="degraissage.png" alt="Dépoussiérage et désinfection VMC CTA — Hygiène Net Pro" loading="lazy" />
-        </div>
-        <div class="scard__top">
-          <div class="scard__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-            </svg>
-          </div>
-          <h3>Dépoussiérage &amp; Désinfection VMC / CTA</h3>
-        </div>
-        <p>Nettoyage intégral de vos réseaux aérauliques : gaines VMC, centrales de traitement d’air, bouches et caissons. Un réseau propre, c’est un air sain pour votre personnel et vos clients, des performances préservées et les risques bactériologiques éliminés.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Réseau traité de bout en bout</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Éradication des risques bactériologiques</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Rapport d’intervention avec schéma</li>
-        </ul>
-      </article>
-
-      <!-- Service 4 -->
-      <article class="scard reveal delay-4">
-        <div class="scard__img">
-          <img src="degraissage.png" alt="Nettoyage évaporateur meuble froid — Hygiène Net Pro" loading="lazy" />
-        </div>
-        <div class="scard__top">
-          <div class="scard__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2C9 6 6 9 6 13a6 6 0 0 0 12 0c0-4-3-7-6-11z"/><path d="M9 14h6"/>
-            </svg>
-          </div>
-          <h3>Nettoyage évaporateur &amp; meuble froid</h3>
-        </div>
-        <p>Dégraissage et désinfection des évaporateurs et meubles frigorifiques pour rétablir vos performances de froid et garantir l’hygiène de vos denrées. Un entretien régulier réduit votre consommation d’énergie et prévient les pannes coûteuses.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Performances de froid restaurées</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Hygiène alimentaire garantie</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Consommation énergétique optimisée</li>
-        </ul>
-      </article>
     </div>
   </div>
 </section>
@@ -2021,11 +1955,6 @@
         <span class="stcard__bar"></span>
       </article>
       <article class="stcard reveal delay-3">
-        <div class="stcard__num">4 domaines</div>
-        <p class="stcard__label">Hotte, nuisibles, VMC/CTA, froid &amp; clim.</p>
-        <span class="stcard__bar"></span>
-      </article>
-      <article class="stcard reveal delay-4">
         <div class="stcard__num">100&nbsp;% Pro</div>
         <p class="stcard__label">Interventions adaptées aux entreprises.</p>
         <span class="stcard__bar"></span>
@@ -2119,48 +2048,10 @@
 
         <!-- ÉTAPE 1 : Prestation -->
         <div class="res-panel is-active" id="rs1">
-          <p class="res-ptitle">Quelle prestation souhaitez-vous ?</p>
-          <p class="res-psub">Sélectionnez le type d’intervention.</p>
-          <div class="res-err" id="err1">Veuillez sélectionner une prestation pour continuer.</div>
-          <div class="res-services">
-
-            <label class="res-sc">
-              <input type="radio" name="prestation" value="Dégraissage de hotte" />
-              <div class="res-sc__inner">
-                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v4H4z"/><path d="M6 14v6h12v-6"/><path d="M7 10V6h10v4"/></svg></div>
-                <strong>Dégraissage de hotte</strong>
-                <em>Hottes, filtres, conduits &amp; gaines</em>
-              </div>
-            </label>
-
-            <label class="res-sc">
-              <input type="radio" name="prestation" value="Dératisation &amp; Désinsectisation" />
-              <div class="res-sc__inner">
-                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c3-4 7-4 9-2 2 2 6 3 9 1"/><path d="M3 17c0 2 2 3 4 3"/><circle cx="17" cy="9" r="1.4"/><path d="M14 11l-3-2"/></svg></div>
-                <strong>Dératisation &amp; Désinsectisation</strong>
-                <em>Rats, souris, cafards, nuisibles</em>
-              </div>
-            </label>
-
-            <label class="res-sc">
-              <input type="radio" name="prestation" value="Dépoussiérage &amp; Désinfection VMC / CTA" />
-              <div class="res-sc__inner">
-                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-                <strong>Dépoussiérage &amp; Désinfection VMC / CTA</strong>
-                <em>Réseaux de ventilation &amp; gaines</em>
-              </div>
-            </label>
-
-            <label class="res-sc">
-              <input type="radio" name="prestation" value="Nettoyage évaporateur, meuble froid &amp; climatisation" />
-              <div class="res-sc__inner">
-                <div class="res-sc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 6 6 9 6 13a6 6 0 0 0 12 0c0-4-3-7-6-11z"/><path d="M9 14h6"/></svg></div>
-                <strong>Nettoyage évaporateur et meuble froid</strong>
-                <em>Froid commercial &amp; climatisation</em>
-              </div>
-            </label>
-
-          </div>
+          <p class="res-ptitle">Dégraissage de hotte professionnelle</p>
+          <p class="res-psub">Remplissez le formulaire pour demander votre intervention.</p>
+          <div class="res-err" id="err1" style="display:none"></div>
+          <input type="hidden" name="prestation" value="Dégraissage de hotte" />
           <button type="button" class="btn btn--primary" id="next1">Continuer →</button>
         </div>
 
@@ -2593,9 +2484,8 @@
       var err = el('err'+n);
       var ok = false;
       if(n===1){
-        var ch = document.querySelector('input[name="prestation"]:checked');
-        ok = !!ch;
-        if(ok) fd.prestation = ch.value;
+        fd.prestation = 'Dégraissage de hotte';
+        ok = true;
       }
       if(n===2){
         var d  = el('res-date').value;
